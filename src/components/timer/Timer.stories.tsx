@@ -1,22 +1,19 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import TimerComponent from ".";
+import Timer from ".";
+import dayjs from "dayjs";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Components/Timer",
-  component: TimerComponent,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-} as ComponentMeta<typeof TimerComponent>;
+  component: Timer,
+} as ComponentMeta<typeof Timer>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof TimerComponent> = (args) => (
-  <TimerComponent {...args} />
-);
+const Template: ComponentStory<typeof Timer> = (args) => <Timer {...args} />;
 
-export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-  progress: 25,
+export const Default = Template.bind({});
+
+Default.args = {
+  start: dayjs("2022-04-13T00:34:56").toDate(),
+  end: dayjs("2022-04-13T00:36:10").toDate(),
 };

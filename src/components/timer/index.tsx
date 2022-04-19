@@ -1,24 +1,25 @@
 import dayjs from "dayjs";
-import React, { VFC } from "react";
+import React, { useContext, VFC } from "react";
+import TimerProvider, { useTimer } from "../../provider/TimerProvider";
 import { formattedSeconds } from "../../utils/formattedSeconds";
 import ProgressCircle from "../progresscircle";
 import TimerDisplay from "../timerdisplay";
 
-const Timer: VFC<{ end: Date; start: Date }> = ({ start, end }) => {
-  if (!dayjs(end).isValid()) {
-    return null;
-  }
-
-  const now = dayjs();
-  const endTime = dayjs(end);
-
-  const diff = dayjs(endTime).diff(dayjs(start));
-  const remaining = Math.max(endTime.diff(now) / 1000, 0);
-  const progress = parseInt(`${(remaining / (diff / 1000)) * 100}`);
+const Timer: VFC = () => {
+  const {
+    initialRemainingTime,
+    remainingTime,
+    timerState,
+    toggleTimer,
+    reset,
+  } = useTimer();
+  const progress = parseInt(`${(remainingTime / initialRemainingTime) * 100}`);
 
   return (
     <div style={{ position: "relative", width: 300, height: 300, left: 3 }}>
-      <ProgressCircle progress={Math.abs(progress - 100)} />
+      <ProgressCircle
+        progress={Math.abs((isNaN(progress) ? 0 : progress) - 100)}
+      />
       <div
         style={{
           position: "absolute",
@@ -29,7 +30,15 @@ const Timer: VFC<{ end: Date; start: Date }> = ({ start, end }) => {
           marginTop: "-3em",
         }}
       >
-        <TimerDisplay time={remaining} />
+        <button
+          onClick={() => {
+            toggleTimer();
+          }}
+        >
+          {timerState === "stopped" ? "Start" : "Stop"} - {progress}
+        </button>{" "}
+        <button onClick={() => reset()}>Reset</button>
+        <TimerDisplay time={remainingTime} />
       </div>
     </div>
   );

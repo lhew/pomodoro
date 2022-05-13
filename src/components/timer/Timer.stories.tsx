@@ -10,7 +10,7 @@ export default {
   component: Timer,
 } as ComponentMeta<typeof Timer>;
 
-const Template: ComponentStory<typeof Timer> = (args) => (
+const Template: ComponentStory<typeof Timer> = () => (
   <TimerProvider
     initialRemainingTime={5}
     onFinish={() => {
@@ -25,6 +25,8 @@ const Template: ComponentStory<typeof Timer> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  start: dayjs("2022-04-13T00:34:56").toDate(),
-  end: dayjs("2022-04-13T00:36:10").toDate(),
+  initialRemainingTime: 5,
+  onFinish() {
+    console.log("finished.");
+  },
 };

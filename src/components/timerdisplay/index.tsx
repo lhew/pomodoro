@@ -6,7 +6,7 @@ import { formattedSeconds } from "../../utils/formattedSeconds";
 const Wrapper = styled.span`
   font: normal 1.5em sans-serif;
 `;
-const TimerDisplay: VFC<{ time: number }> = ({ time = 0 }) => {
+const TimerDisplay: VFC<{ time: number }> = ({ time }) => {
   return (
     <Wrapper data-testid="timer-display">
       {!isNaN(parseInt(`${time}`)) ? formattedSeconds(time) : "--:--"}

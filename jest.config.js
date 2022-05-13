@@ -3,6 +3,7 @@ module.exports = {
     'src/**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
     '!**/node_modules/**',
+    '!**/**.stories.{tsx,js,ts}'
   ],
   moduleNameMapper: {
     // Handle CSS imports (with CS!S modules)

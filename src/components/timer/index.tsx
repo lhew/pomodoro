@@ -1,11 +1,10 @@
 import dayjs from "dayjs";
-import React, { useContext, VFC } from "react";
-import TimerProvider, { useTimer } from "../../provider/TimerProvider";
-import { formattedSeconds } from "../../utils/formattedSeconds";
+import React from "react";
+import { useTimer } from "../../provider/timer/TimerProvider";
 import ProgressCircle from "../progresscircle";
 import TimerDisplay from "../timerdisplay";
 
-const Timer: VFC = () => {
+const Timer = () => {
   const {
     initialRemainingTime,
     remainingTime,

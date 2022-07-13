@@ -2,8 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import Timer from ".";
-import dayjs from "dayjs";
-import TimerProvider from "../../provider/TimerProvider";
+import TimerProvider from "../../provider/timer/TimerProvider";
 
 export default {
   title: "Components/Timer",

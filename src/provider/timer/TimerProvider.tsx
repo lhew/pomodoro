@@ -7,28 +7,8 @@ import {
   useState,
 } from "react";
 import { useInterval } from "usehooks-ts";
-
-interface ITimerContext {
-  timerState: "stopped" | "running";
-  initialRemainingTime: number;
-  remainingTime: number;
-  toggleTimer(): void;
-  start(): void;
-  stop(): void;
-  reset(): void;
-  finish(): void;
-}
-
-const TimerContext = createContext<ITimerContext>({
-  timerState: "stopped",
-  initialRemainingTime: 300,
-  remainingTime: 0,
-  toggleTimer() {},
-  start() {},
-  stop() {},
-  reset() {},
-  finish() {},
-});
+import { TimerContext } from "./context";
+import { ITimerContext } from "./types";
 
 const TimerProvider: FC<{
   children: ReactNode;

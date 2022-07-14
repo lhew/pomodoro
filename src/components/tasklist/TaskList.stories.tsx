@@ -22,7 +22,7 @@ export const Default = Template.bind({});
 Default.args = {
   initialTasks: [
     { id: "1", name: "Buy milk", status: TaskStatus.IDLE },
-    { id: "2", name: "Walk teddy", status: TaskStatus.IDLE },
+    { id: "2", name: "Walk teddy", status: TaskStatus.DONE },
     { id: "3", name: "Call mom", status: TaskStatus.IDLE },
   ],
 };

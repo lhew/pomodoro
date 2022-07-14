@@ -10,7 +10,9 @@
     "release": "standard-version",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test": "jest --setupFiles ./setupTests.js"
+    "test": "jest --setupFiles ./setupTests.js",
+    "fontello:typegen": "node ./scripts/font-typegen.js",
+    "fontello:generate": "fontello-cli install --config fontello.json --css public/icons/css --font public/icons/font && npm run fontello:typegen"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.7.0",
@@ -48,6 +50,7 @@
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
     "eslint-plugin-storybook": "^0.6.1",
+    "fontello-cli": "^0.6.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "os-browserify": "^0.3.0",

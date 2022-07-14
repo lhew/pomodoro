@@ -1,27 +1,20 @@
 import React from "react";
 import { useTask } from "../../provider/task/TaskProvider";
-
+import { TaskStatus } from "../../provider/task/types";
+import { Icons } from "../../generated/icons/types";
 const TaskList = () => {
   const { tasks } = useTask();
 
-  console.log(tasks);
   return (
     <>
-      <div>
-        <p>
-          I’m Derek, an astro-engineer based in Tattooine. I like to build
-          X-Wings at
-          <a className="underline decoration-sky-500">My Company, Inc</a>.
-          Outside of work, I like to{" "}
-          <a className="underline decoration-pink-500">watch pod-racing</a> and
-          have <a className="underline decoration-indigo-500">light-saber</a>{" "}
-          fights.
-        </p>
-      </div>
+      {(tasks || []).length === 0 && <div>No tasks at the moment</div>}
       <ul>
         {tasks.map((task) => (
-          <li key={task.id} className="grid grid-cols-2">
-            <div>{task.name}</div> ({task.status})
+          <li key={task.id} className="grid grid-cols-3">
+            <div>{task.name}</div>
+            {task.status === TaskStatus.DONE && <i className={Icons.OK} />}
+            {task.status === TaskStatus.IDLE && <i className={Icons.CCW} />}
+            {task.status !== TaskStatus.DONE && <i className={Icons.TRASH} />}
           </li>
         ))}
       </ul>

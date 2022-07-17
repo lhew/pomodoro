@@ -3,10 +3,10 @@ import { ITask, ITaskContext, ITaskInput } from "./types";
 
 export const TaskContext = createContext<ITaskContext>({
   tasks: [],
-  addTask(_task: ITaskInput) {
+  addTask(_task) {
     return;
   },
-  removeTask(_taskId: ITask["id"]) {
+  removeTask(_taskId) {
     return;
   },
 });

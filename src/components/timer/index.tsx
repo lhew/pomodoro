@@ -1,10 +1,10 @@
-import dayjs from "dayjs";
 import React from "react";
+import { Icons } from "../../generated/icons/types";
 import { useTimer } from "../../provider/timer/TimerProvider";
 import ProgressCircle from "../progresscircle";
 import TimerDisplay from "../timerdisplay";
 
-const Timer = () => {
+const Timer = ({ size = 300 }) => {
   const {
     initialRemainingTime,
     remainingTime,
@@ -15,29 +15,24 @@ const Timer = () => {
   const progress = parseInt(`${(remainingTime / initialRemainingTime) * 100}`);
 
   return (
-    <div style={{ position: "relative", width: 300, height: 300, left: 3 }}>
+    <div className={`relative w-[${size}px] h-[${size}px] l-3`}>
       <ProgressCircle
         progress={Math.abs((isNaN(progress) ? 0 : progress) - 100)}
       />
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          zIndex: 2,
-          marginLeft: "-2em",
-          marginTop: "-3em",
-        }}
-      >
+      <div className="absolute left-[50%] top-[50%] z-2 translate-x-[-50%] translate-y-[-40%] grid grid-cols-2 gap-3 justify-center">
         <button
           onClick={() => {
             toggleTimer();
           }}
         >
-          {timerState === "stopped" ? "Start" : "Stop"} - {progress}
-        </button>{" "}
-        <button onClick={() => reset()}>Reset</button>
-        <TimerDisplay time={remainingTime} />
+          <i
+            className={`${timerState === "stopped" ? Icons.PLAY : Icons.STOP}`}
+          />
+        </button>
+        <button onClick={() => reset()}>
+          <i className={Icons.CCW} />
+        </button>
+        <TimerDisplay time={remainingTime} className="col-span-2" />
       </div>
     </div>
   );

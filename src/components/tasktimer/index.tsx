@@ -1,18 +1,22 @@
 import React from "react";
-import TaskProvider from "../../provider/task/TaskProvider";
-import { TaskStatus } from "../../provider/task/types";
+import { useTask } from "../../provider/task/TaskProvider";
+import TaskForm from "../taskform";
+import TaskList from "../tasklist";
+import Timer from "../timer";
 
 const TaskTimer = () => {
+  const { addTask, tasks } = useTask();
+
   return (
-    <TaskProvider
-      initialTasks={[
-        { id: "1", name: "Buy milk", status: TaskStatus.IDLE },
-        { id: "2", name: "Walk teddy", status: TaskStatus.IDLE },
-        { id: "3", name: "Call mom", status: TaskStatus.IDLE },
-      ]}
-    >
-      foo
-    </TaskProvider>
+    <div className="max-w-[25rem] grid justify-center">
+      <Timer />
+      <TaskList />
+      <TaskForm
+        onAddTask={(name) => {
+          addTask(name);
+        }}
+      />
+    </div>
   );
 };
 

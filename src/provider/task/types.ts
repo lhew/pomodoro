@@ -13,7 +13,7 @@ export type  ITaskInput = Omit<ITask, 'id'|'status'>
 
 export interface ITaskContext {
     tasks: ITask[] | [];
-    addTask(task:ITaskInput):void
+    addTask(task:string):void
     removeTask(taskId:ITask['id']):void
 }
 

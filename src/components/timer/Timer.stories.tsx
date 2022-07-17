@@ -10,22 +10,21 @@ export default {
 } as ComponentMeta<typeof Timer>;
 
 const Template: ComponentStory<typeof Timer> = () => (
-  <TimerProvider
-    initialRemainingTime={5}
-    onFinish={() => {
-      alert("Finished");
-      return null;
-    }}
-  >
-    <Timer />
-  </TimerProvider>
+  <div className="max-w-[25rem] grid justify-center">
+    <TimerProvider
+      initialRemainingTime={5}
+      onFinish={() => {
+        alert("Finished");
+        return null;
+      }}
+    >
+      <Timer />
+    </TimerProvider>
+  </div>
 );
 
 export const Default = Template.bind({});
 
 Default.args = {
-  initialRemainingTime: 5,
-  onFinish() {
-    console.log("finished.");
-  },
+  size: 300,
 };

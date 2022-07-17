@@ -6,10 +6,10 @@ import { ITask, ITaskContext, ITaskInput, TaskStatus } from "./types";
 
 interface TaskProviderProps {
   children: ReactNode;
-  initialTasks: ITask[];
+  initialTasks?: ITask[];
 }
 
-const TaskProvider = ({ children, initialTasks }: TaskProviderProps) => {
+const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
   const [_tasks, _setTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
@@ -20,14 +20,15 @@ const TaskProvider = ({ children, initialTasks }: TaskProviderProps) => {
     <TaskContext.Provider
       value={{
         tasks: _tasks,
-        addTask: (task: ITaskInput) => {
-          _setTasks((tasks) => [
-            ...tasks,
-            { ...task, id: v4(), status: TaskStatus.IDLE },
+
+        addTask(task) {
+          _setTasks([
+            ..._tasks,
+            { name: task, id: v4(), status: TaskStatus.IDLE },
           ]);
         },
         removeTask(taskId: ITask["id"]) {
-          _setTasks((tasks) => tasks.filter((task) => (task.id! += taskId)));
+          _setTasks((tasks) => tasks.filter((task) => task.id !== taskId));
         },
       }}
     >

@@ -10,9 +10,7 @@ export default {
   component: TaskList,
 } as ComponentMeta<typeof TaskList>;
 
-const Template: ComponentStory<
-  typeof TaskList & { args: { initialTasks: ITask[] } }
-> = (args: { initialTasks: ITask[] }) => (
+const Template: ComponentStory<typeof TaskList> = (args) => (
   <TaskProvider initialTasks={args.initialTasks}>
     <TaskList />
   </TaskProvider>

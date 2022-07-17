@@ -1,4 +1,6 @@
 @import "./custom-modern-normalizer.css";
+@import "/icons/css/fontello.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

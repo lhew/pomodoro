@@ -10,8 +10,8 @@ export default {
   component: TaskList,
 } as ComponentMeta<typeof TaskList>;
 
-const Template: ComponentStory<typeof TaskList> = (args) => (
-  <TaskProvider initialTasks={args.initialTasks}>
+const Template: ComponentStory<typeof TaskProvider> = (args) => (
+  <TaskProvider {...args}>
     <TaskList />
   </TaskProvider>
 );

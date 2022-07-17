@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 import { useUser } from "@auth0/nextjs-auth0";
+import TaskTimer from "../components/tasktimer";
+import TaskProvider from "../provider/task/TaskProvider";
+import TimerProvider from "../provider/timer/TimerProvider";
 
 const Home: NextPage = () => {
   const { user, error, isLoading } = useUser();
@@ -20,24 +22,27 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h1
-          className={`${styles.title} grid rounded-full bg-purple-500`}
-          style={{ backgroundColor: "purple" }}
-        >
-          Welcome to Next.js {user?.name}
-        </h1>
+        <div className="flex flex-col">
+          <h1>Pomodoro</h1>
+          <span>Get stuff done today</span>
+        </div>
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
+        <TimerProvider
+          initialRemainingTime={0}
+          onFinish={function () {
+            console.log("finished");
+          }}
+        >
+          <TaskProvider>
+            <TaskTimer />
+          </TaskProvider>
+        </TimerProvider>
 
         <div className={styles.grid}>
           {!user?.name && <a href="/api/auth/login">Login</a>}
           {user?.name && <a href="/api/auth/logout">Logout</a>}
         </div>
       </main>
-      la
     </div>
   );
 };

@@ -1,25 +1,25 @@
-import {
-  createContext,
-  FC,
-  ReactNode,
-  useContext,
-  useRef,
-  useState,
-} from "react";
+import { ReactNode, useContext, useRef, useState } from "react";
 import { useInterval } from "usehooks-ts";
 import { TimerContext } from "./context";
 import { ITimerContext } from "./types";
 
-const TimerProvider: FC<{
+interface TimerProviderProps {
   children: ReactNode;
+  /**
+   * Time in seconds
+   */
   initialRemainingTime: number;
-  onFinish: () => null;
-}> = ({ children, initialRemainingTime, onFinish }) => {
+  onFinish?: () => void;
+}
+
+const TimerProvider = ({
+  children,
+  initialRemainingTime = 25 * 60,
+  onFinish = () => {},
+}: TimerProviderProps) => {
   const [remainingTime, setRemainingTime] = useState(initialRemainingTime);
   const [timerState, setTimerState] =
     useState<"running" | "stopped">("stopped");
-
-  let timeout = useRef();
 
   const reset = () => {
     setRemainingTime(initialRemainingTime);

@@ -2,10 +2,14 @@ import React from "react";
 import { useTask } from "../../provider/task/TaskProvider";
 import TaskForm from "../taskform";
 import TaskList from "../tasklist";
-import Timer from "../timer";
+import dynamic from "next/dynamic";
+
+const Timer = dynamic(() => import("../timer"), {
+  ssr: false,
+});
 
 const TaskTimer = () => {
-  const { addTask, tasks } = useTask();
+  const { addTask } = useTask();
 
   return (
     <div className="max-w-[25rem] grid justify-center">

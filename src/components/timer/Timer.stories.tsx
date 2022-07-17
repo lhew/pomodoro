@@ -2,8 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import Timer from ".";
-import dayjs from "dayjs";
-import TimerProvider from "../../provider/TimerProvider";
+import TimerProvider from "../../provider/timer/TimerProvider";
 
 export default {
   title: "Components/Timer",
@@ -11,22 +10,21 @@ export default {
 } as ComponentMeta<typeof Timer>;
 
 const Template: ComponentStory<typeof Timer> = () => (
-  <TimerProvider
-    initialRemainingTime={5}
-    onFinish={() => {
-      alert("Finished");
-      return null;
-    }}
-  >
-    <Timer />
-  </TimerProvider>
+  <div className="max-w-[25rem] grid justify-center">
+    <TimerProvider
+      initialRemainingTime={5}
+      onFinish={() => {
+        alert("Finished");
+        return null;
+      }}
+    >
+      <Timer />
+    </TimerProvider>
+  </div>
 );
 
 export const Default = Template.bind({});
 
 Default.args = {
-  initialRemainingTime: 5,
-  onFinish() {
-    console.log("finished.");
-  },
+  size: 300,
 };

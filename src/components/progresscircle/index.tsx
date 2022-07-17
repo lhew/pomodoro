@@ -1,7 +1,7 @@
-import React, { VFC } from "react";
+import React from "react";
 import { Arc, Circle, Group, Layer, Stage } from "react-konva";
 
-const ProgressCircle: VFC<{ progress?: number }> = ({ progress = 0 }) => {
+const ProgressCircle = ({ progress = 0 }) => {
   const CANVAS = 300;
   const RADIUS = CANVAS / 2;
   const MARKER_WIDTH = 25;

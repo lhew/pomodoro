@@ -1,29 +1,30 @@
 import { ReactNode, useContext, useRef, useState } from "react";
 import { useInterval } from "usehooks-ts";
 import { TimerContext } from "./context";
-import { ITimerContext } from "./types";
+import { ITimerContext, TimerMode, TimerState } from "./types";
 
 interface TimerProviderProps {
   children: ReactNode;
   /**
    * Time in seconds
    */
-  initialRemainingTime: number;
+  initialRemainingTime?: number;
   onFinish?: () => void;
 }
 
 const TimerProvider = ({
   children,
-  initialRemainingTime = 25 * 60,
+  //initialRemainingTime = 25 * 60,
+  initialRemainingTime = 5,
   onFinish = () => {},
 }: TimerProviderProps) => {
   const [remainingTime, setRemainingTime] = useState(initialRemainingTime);
-  const [timerState, setTimerState] =
-    useState<"running" | "stopped">("stopped");
+  const [timerState, setTimerState] = useState<TimerState>("stopped");
+  const [timerMode, setTimerMode] = useState<TimerMode>("work");
 
-  const reset = () => {
+  const reset = (nextAction: TimerState = "stopped") => {
     setRemainingTime(initialRemainingTime);
-    setTimerState("stopped");
+    setTimerState(nextAction);
   };
 
   useInterval(() => {
@@ -31,6 +32,7 @@ const TimerProvider = ({
       setRemainingTime((oldVal) => oldVal - 1);
     }
     if (timerState === "running" && remainingTime === 0) {
+      setTimerMode(timerMode === "break" ? "work" : "break");
       onFinish();
       reset();
     }
@@ -42,12 +44,14 @@ const TimerProvider = ({
         initialRemainingTime,
         timerState,
         remainingTime,
+        timerMode,
         toggleTimer() {
           setTimerState(timerState === "running" ? "stopped" : "running");
         },
         start() {},
         stop() {},
         reset,
+        setTimerMode,
         finish() {},
       }}
     >

@@ -27,12 +27,7 @@ const Home: NextPage = () => {
           <span>Get stuff done today</span>
         </div>
 
-        <TimerProvider
-          initialRemainingTime={0}
-          onFinish={function () {
-            console.log("finished");
-          }}
-        >
+        <TimerProvider>
           <TaskProvider>
             <TaskTimer />
           </TaskProvider>

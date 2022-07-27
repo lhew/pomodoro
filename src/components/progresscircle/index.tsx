@@ -1,7 +1,8 @@
 import React from "react";
 import { Arc, Circle, Group, Layer, Stage } from "react-konva";
+import { useTimer } from "../../provider/timer/TimerProvider";
 
-const ProgressCircle = ({ progress = 0 }) => {
+const ProgressCircle = ({ progress = 0, disabled = false }) => {
   const CANVAS = 300;
   const RADIUS = CANVAS / 2;
   const MARKER_WIDTH = 25;
@@ -14,8 +15,10 @@ const ProgressCircle = ({ progress = 0 }) => {
 
   const progress2Deg = (360 * computedProgress) / 100;
 
+  const { timerMode } = useTimer();
+
   return (
-    <div data-testid="canvas">
+    <div data-testid="canvas" className={`opacity-[${disabled ? "0.4" : "1"}]`}>
       <Stage
         width={CANVAS}
         height={CANVAS}
@@ -38,7 +41,7 @@ const ProgressCircle = ({ progress = 0 }) => {
             rotation={DEFAULT_ROTATION}
             x={RADIUS}
             y={RADIUS}
-            fill="#D8D8D8"
+            fill={timerMode === "work" ? "#d4d4d4" : "#eca9a9"}
             innerRadius={RADIUS - MARKER_WIDTH * 1.25}
             outerRadius={RADIUS - MARKER_WIDTH / 1.75}
           />
@@ -52,7 +55,7 @@ const ProgressCircle = ({ progress = 0 }) => {
           >
             <Circle
               radius={MARKER_WIDTH}
-              fill="blue"
+              fill={timerMode === "work" ? "#00BFFF" : "#FF0000"}
               x={CANVAS - MARKER_WIDTH}
               y={RADIUS}
             />

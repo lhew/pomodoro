@@ -6,6 +6,9 @@ export const TaskContext = createContext<ITaskContext>({
   addTask(_task) {
     return;
   },
+  setCurrentTask(_taskId) {
+    return;
+  },
   removeTask(_taskId) {
     return;
   },

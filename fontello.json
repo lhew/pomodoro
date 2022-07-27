@@ -83,6 +83,12 @@
       "css": "clock",
       "code": 59400,
       "src": "fontawesome"
+    },
+    {
+      "uid": "3a26448b711645ba1abfc86c1a6e2f30",
+      "css": "coffee",
+      "code": 61684,
+      "src": "fontawesome"
     }
   ]
 }

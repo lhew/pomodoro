@@ -12,7 +12,7 @@ const TaskTimer = () => {
   const { addTask } = useTask();
 
   return (
-    <div className="max-w-[25rem] grid justify-center">
+    <div className="max-w-[25em] flex flex-col align-center m-[0_auto] justify-center">
       <Timer />
       <TaskList />
       <TaskForm

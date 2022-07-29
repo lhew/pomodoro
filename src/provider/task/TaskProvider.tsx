@@ -2,8 +2,7 @@ import { v4 } from "uuid";
 
 import { ReactNode, useContext, useEffect, useState } from "react";
 import { TaskContext } from "./context";
-import { ITask, ITaskContext, ITaskInput, TaskStatus } from "./types";
-import { useTimer } from "../timer/TimerProvider";
+import { ITask, ITaskContext, TaskStatus } from "./types";
 
 interface TaskProviderProps {
   children: ReactNode;
@@ -15,7 +14,7 @@ const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
 
   useEffect(() => {
     _setTasks(initialTasks);
-  }, [initialTasks]);
+  }, []);
 
   return (
     <TaskContext.Provider
@@ -36,6 +35,16 @@ const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
         setCurrentTask(taskId) {
           _setTasks(
             _tasks.map((task) => ({ ...task, current: task.id === taskId }))
+          );
+        },
+
+        setTaskStatus(taskId, status) {
+          _setTasks(
+            _tasks.map((task) => ({
+              ...task,
+              current: false,
+              status: taskId === task.id ? status : task.status,
+            }))
           );
         },
 

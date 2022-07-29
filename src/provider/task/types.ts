@@ -17,6 +17,7 @@ export interface ITaskContext {
     addTask(task:string):void
     removeTask(taskId:ITask['id']):void
     setCurrentTask(taskId:ITask['id']):void
+    setTaskStatus(_taskId:ITask['id'], _status: ITask['status']): void
     
 }
 

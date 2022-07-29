@@ -1,6 +1,7 @@
 import React from "react";
 import { Icons } from "../../generated/icons/types";
 import { useTask } from "../../provider/task/TaskProvider";
+import { TaskStatus } from "../../provider/task/types";
 import { useTimer } from "../../provider/timer/TimerProvider";
 import ProgressCircle from "../progresscircle";
 import TimerDisplay from "../timerdisplay";
@@ -10,13 +11,19 @@ const Timer = ({ size = 300 }) => {
     initialRemainingTime,
     remainingTime,
     timerState,
+    timerMode,
     toggleTimer,
     reset,
   } = useTimer();
 
-  const { tasks } = useTask();
+  const { tasks, setCurrentTask } = useTask();
 
   const progress = parseInt(`${(remainingTime / initialRemainingTime) * 100}`);
+  const pendingTasks = (tasks || []).filter(
+    (task) =>
+      task.status === TaskStatus.IDLE || task.status === TaskStatus.PROGRESS
+  );
+  const currentTask = pendingTasks.find((task) => task.current);
 
   const statusIcon = () => {
     switch (timerState) {
@@ -38,10 +45,13 @@ const Timer = ({ size = 300 }) => {
       <ProgressCircle
         progress={Math.abs((isNaN(progress) ? 0 : progress) - 100)}
       />
-      <div className="absolute left-[50%] top-[50%] z-2 translate-x-[-50%] translate-y-[-40%] grid grid-cols-2 gap-3 justify-center">
+      <div className="absolute left-[50%] top-[50%] z-2 translate-x-[-50%] translate-y-[-40%] grid grid-cols-3 gap-3 justify-center">
         <button
-          disabled={tasks.length === 0}
+          disabled={pendingTasks.length === 0}
           onClick={() => {
+            if (!currentTask) {
+              setCurrentTask(pendingTasks[0].id);
+            }
             toggleTimer();
           }}
         >
@@ -50,7 +60,10 @@ const Timer = ({ size = 300 }) => {
         <button disabled={tasks.length === 0} onClick={() => reset()}>
           <i className={Icons.CCW} />
         </button>
-        <TimerDisplay time={remainingTime} className="col-span-2" />
+        <button className="font-bold">
+          +{timerMode === "work" ? "5" : "2"}
+        </button>
+        <TimerDisplay time={remainingTime} className="col-span-3 text-center" />
       </div>
     </div>
   );

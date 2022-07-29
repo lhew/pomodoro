@@ -1,23 +1,23 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import TaskList from ".";
+import TaskListComponent from ".";
 import TaskProvider from "../../provider/task/TaskProvider";
-import { ITask, TaskStatus } from "../../provider/task/types";
+import { TaskStatus } from "../../provider/task/types";
 
 export default {
-  title: "Components/TaskList",
-  component: TaskList,
-} as ComponentMeta<typeof TaskList>;
+  title: "Components",
+  component: TaskListComponent,
+} as ComponentMeta<typeof TaskListComponent>;
 
 const Template: ComponentStory<typeof TaskProvider> = (args) => (
   <TaskProvider {...args}>
-    <TaskList />
+    <TaskListComponent />
   </TaskProvider>
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const TaskList = Template.bind({});
+TaskList.args = {
   initialTasks: [
     { id: "1", name: "Buy milk", status: TaskStatus.IDLE, current: true },
     { id: "2", name: "Walk teddy", status: TaskStatus.DONE },

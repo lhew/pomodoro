@@ -1,20 +1,19 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import TimerDisplay from ".";
-import dayjs from "dayjs";
+import TimerDisplayComponent from ".";
 
 export default {
-  title: "Components/TimerDisplay",
-  component: TimerDisplay,
-} as ComponentMeta<typeof TimerDisplay>;
+  title: "Components",
+  component: TimerDisplayComponent,
+} as ComponentMeta<typeof TimerDisplayComponent>;
 
-const Template: ComponentStory<typeof TimerDisplay> = (args) => (
-  <TimerDisplay {...args} />
+const Template: ComponentStory<typeof TimerDisplayComponent> = (args) => (
+  <TimerDisplayComponent {...args} />
 );
 
-export const Default = Template.bind({});
+export const TimerDisplay = Template.bind({});
 
-Default.args = {
+TimerDisplay.args = {
   time: Date.now(),
 };

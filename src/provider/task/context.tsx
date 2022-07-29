@@ -12,4 +12,7 @@ export const TaskContext = createContext<ITaskContext>({
   removeTask(_taskId) {
     return;
   },
+  setTaskStatus(_taskId, _status) {
+    return;
+  },
 });

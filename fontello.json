@@ -89,6 +89,18 @@
       "css": "coffee",
       "code": 61684,
       "src": "fontawesome"
+    },
+    {
+      "uid": "44e04715aecbca7f266a17d5a7863c68",
+      "css": "plus",
+      "code": 59401,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "ec347024a3640deebeeab53fd0d5ad03",
+      "css": "forward",
+      "code": 59402,
+      "src": "entypo"
     }
   ]
 }

@@ -1,22 +1,30 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import ProgressCircle from ".";
+import ProgressCircleComponent from ".";
+import TimerProvider, {
+  TimerProviderProps,
+} from "../../provider/timer/TimerProvider";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Components/ProgressCircle",
-  component: ProgressCircle,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-} as ComponentMeta<typeof ProgressCircle>;
+  title: "Components",
+  component: ProgressCircleComponent,
+  argTypes: {
+    initialMode: {
+      options: ["work", "break"],
+      control: { type: "select" },
+    },
+  },
+} as ComponentMeta<typeof ProgressCircleComponent>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ProgressCircle> = (args) => (
-  <ProgressCircle {...args} />
+const Template: ComponentStory<typeof ProgressCircleComponent> = (args) => (
+  <TimerProvider initialMode={(args as TimerProviderProps).initialMode}>
+    <ProgressCircleComponent {...args} />
+  </TimerProvider>
 );
 
-export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
+export const ProgressCircle = Template.bind({});
+
+ProgressCircle.args = {
   progress: 25,
 };

@@ -22,7 +22,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className="flex flex-col">
+        <div className="flex flex-col text-center mb-10">
           <h1>Pomodoro</h1>
           <span>Get stuff done today</span>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTask } from "../../provider/task/TaskProvider";
 import { ITask, TaskStatus } from "../../provider/task/types";
 import { Icons } from "../../generated/icons/types";
@@ -19,6 +19,15 @@ const TaskList = () => {
       task.status === TaskStatus.IDLE || task.status === TaskStatus.PROGRESS
   );
 
+  useEffect(() => {
+    if (
+      pendingTasks.length > 0 &&
+      pendingTasks.filter((task) => task.current).length === 0
+    ) {
+      setCurrentTask(pendingTasks[0].id);
+    }
+  }, [pendingTasks]);
+
   return (
     <>
       {(tasks || []).length === 0 && (
@@ -30,10 +39,7 @@ const TaskList = () => {
       <ul>
         {pendingTasks.map(({ id, name, current }) => (
           <li key={id} className="grid gap-x-3 grid-cols-[1fr_auto_auto]">
-            <span className={`${current ? "font-bold" : ""}`}>
-              {" "}
-              {id} - {name}
-            </span>
+            <span className={`${current ? "font-bold" : ""}`}>{name}</span>
             <button
               onClick={() => {
                 setCurrentTask(id);
@@ -67,9 +73,7 @@ const TaskList = () => {
             key={id}
             className="grid gap-x-3 grid-cols-[1fr_auto_auto] line-through"
           >
-            <span>
-              {id} {name}
-            </span>
+            <span>{name}</span>
             <span></span>
             <button
               onClick={() => {

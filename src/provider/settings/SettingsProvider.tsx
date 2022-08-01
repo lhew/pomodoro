@@ -4,17 +4,15 @@ import { ReactNode, useContext, useState } from "react";
 import { SettingsContext } from "./context";
 import { ISettings, ISettingsContext } from "./types";
 import SettingsPopup from "../../components/settingspopup";
+import { useRepository } from "../repository/RepositoryProvider";
 
 interface SettingsProps {
   children: ReactNode;
 }
 
 const SettingsProvider = ({ children }: SettingsProps) => {
-  const [_settings, _saveSettings] = useState<ISettings>({
-    alarmSound: "",
-    breakTime: 3,
-    taskTime: 5,
-  });
+  const { updateSettings, getSettings } = useRepository();
+  const [_settings, _saveSettings] = useState<ISettings>(getSettings());
 
   const [_isOpen, _setIsOpen] = useState(false);
 
@@ -27,6 +25,7 @@ const SettingsProvider = ({ children }: SettingsProps) => {
         },
         saveSettings(_settings: ISettings) {
           _saveSettings(_settings);
+          updateSettings(_settings);
         },
       }}
     >

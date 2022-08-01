@@ -5,7 +5,13 @@ import { useSettings } from "../../provider/settings/SettingsProvider";
 
 const SettingsPopup = () => {
   const {
-    settings: { taskTime, breakTime, alarmSound },
+    settings: {
+      taskTime,
+      breakTime,
+      alarmSound,
+      taskExtraTime,
+      breakExtraTime,
+    },
     toggleSettingsPopup,
     saveSettings,
   } = useSettings();
@@ -22,7 +28,9 @@ const SettingsPopup = () => {
       <Formik
         initialValues={{
           taskTime,
+          taskExtraTime,
           breakTime,
+          breakExtraTime,
           alarmSound,
         }}
         onSubmit={(values) => {
@@ -33,8 +41,9 @@ const SettingsPopup = () => {
         {() => (
           <Form>
             <ul>
+              <li>Tasks</li>
               <li>
-                <span>Task time</span>
+                <span>Normal time</span>
                 <span>
                   <Field
                     name="taskTime"
@@ -46,10 +55,35 @@ const SettingsPopup = () => {
                 </span>
               </li>
               <li>
-                <span>Break time</span>
+                <span>Extra time</span>
+                <span>
+                  <Field
+                    name="taskExtraTime"
+                    type="number"
+                    placeholder="Values in seconds"
+                    min="3"
+                    max="1500"
+                  />
+                </span>
+              </li>
+              <li>Breaks</li>
+              <li>
+                <span>Normal time</span>
                 <span>
                   <Field
                     name="breakTime"
+                    type="number"
+                    placeholder="Values in seconds"
+                    min="3"
+                    max="600"
+                  />
+                </span>
+              </li>
+              <li>
+                <span>Extra time</span>
+                <span>
+                  <Field
+                    name="breakExtraTime"
                     type="number"
                     placeholder="Values in seconds"
                     min="3"

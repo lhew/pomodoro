@@ -57,7 +57,10 @@ const Timer = ({ size = 300 }) => {
           disabled={pendingTasks.length === 0}
           onClick={() => increaseTime()}
         >
-          +{timerMode === "work" ? settings.taskTime : settings.breakTime}
+          +
+          {timerMode === "work"
+            ? settings.taskExtraTime
+            : settings.breakExtraTime}
         </button>
         <button onClick={() => toggleSettingsPopup()}>
           <i className={Icons.COG} />

@@ -4,11 +4,13 @@ export type TimerMode = "work" | "break";
 
 export interface ITimerContext {
     timerState:TimerState;
-    initialRemainingTime: number;
     remainingTime: number;
     timerMode:TimerMode;
+    totalRemainingTime: number;
+    setTotalRemainingTime(totalRemainingTime: number):void;
     toggleTimer(): void;
     setTimerMode(timerMode: TimerMode): void;
+    increaseTime(): void;
     start(): void;
     stop(): void;
     reset(nextAction?: TimerState): void;

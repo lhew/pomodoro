@@ -7,10 +7,12 @@ import { useUser } from "@auth0/nextjs-auth0";
 import TaskTimer from "../components/tasktimer";
 import TaskProvider from "../provider/task/TaskProvider";
 import TimerProvider from "../provider/timer/TimerProvider";
+import RepositoryProvider from "../provider/repository/RepositoryProvider";
+import { ITask, Task } from "../provider/task/types";
+import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
   const { user, error, isLoading } = useUser();
-
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
@@ -26,12 +28,13 @@ const Home: NextPage = () => {
           <h1>Pomodoro</h1>
           <span>Get stuff done today</span>
         </div>
-
-        <TimerProvider>
-          <TaskProvider>
-            <TaskTimer />
-          </TaskProvider>
-        </TimerProvider>
+        <RepositoryProvider>
+          <TimerProvider>
+            <TaskProvider>
+              <TaskTimer />
+            </TaskProvider>
+          </TimerProvider>
+        </RepositoryProvider>
 
         <div className={styles.grid}>
           {!user?.name && <a href="/api/auth/login">Login</a>}

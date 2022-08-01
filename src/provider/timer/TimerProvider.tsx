@@ -15,16 +15,18 @@ export interface TimerProviderProps {
 
 const TimerProvider = ({
   children,
-  //initialRemainingTime = 25 * 60,
-  initialRemainingTime = 5,
+  initialRemainingTime = 3,
   initialMode = "work",
   onFinish = () => {},
 }: TimerProviderProps) => {
+  const [totalRemainingTime, setTotalRemainingTime] =
+    useState(initialRemainingTime);
   const [remainingTime, setRemainingTime] = useState(initialRemainingTime);
   const [timerState, setTimerState] = useState<TimerState>("stopped");
   const [timerMode, setTimerMode] = useState<TimerMode>("work");
 
   const reset = (nextAction: TimerState = "stopped") => {
+    setTotalRemainingTime(initialRemainingTime);
     setRemainingTime(initialRemainingTime);
     setTimerState(nextAction);
   };
@@ -38,27 +40,35 @@ const TimerProvider = ({
       setRemainingTime((oldVal) => oldVal - 1);
     }
     if (timerState === "running" && remainingTime === 0) {
-      // setTimerMode(timerMode === "break" ? "work" : "break");
       onFinish();
       reset();
     }
   }, 1000);
 
+  const increaseTime = () => {
+    const increaseValue = timerMode === "work" ? 5 : 2;
+    setTotalRemainingTime((oldVal) => oldVal + increaseValue);
+    setRemainingTime((oldVal) => oldVal + increaseValue);
+  };
+
+  const toggleTimer = () =>
+    setTimerState(timerState === "running" ? "stopped" : "running");
+
   return (
     <TimerContext.Provider
       value={{
-        initialRemainingTime,
+        totalRemainingTime,
         timerState,
         remainingTime,
         timerMode,
-        toggleTimer() {
-          setTimerState(timerState === "running" ? "stopped" : "running");
-        },
+        setTotalRemainingTime,
         start() {},
         stop() {},
+        finish() {},
+        toggleTimer,
         reset,
         setTimerMode,
-        finish() {},
+        increaseTime,
       }}
     >
       {children}

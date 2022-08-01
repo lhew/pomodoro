@@ -3,10 +3,12 @@ import { ITimerContext, TimerMode } from "./types";
 
 export const TimerContext = createContext<ITimerContext>({
   timerState: "stopped",
-  initialRemainingTime: 300,
+  totalRemainingTime: 300,
   remainingTime: 0,
   timerMode: "work",
+  setTotalRemainingTime() {},
   setTimerMode(_timerMode) {},
+  increaseTime() {},
   toggleTimer() {},
   start() {},
   stop() {},

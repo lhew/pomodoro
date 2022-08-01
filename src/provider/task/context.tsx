@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ITask, ITaskContext, ITaskInput } from "./types";
+import { ITaskContext } from "./types";
 
 export const TaskContext = createContext<ITaskContext>({
   tasks: [],
@@ -14,5 +14,8 @@ export const TaskContext = createContext<ITaskContext>({
   },
   setTaskStatus(_taskId, _status) {
     return;
+  },
+  get(_taskType) {
+    return [];
   },
 });

@@ -9,18 +9,17 @@ const TaskPopupAlert = () => {
   const { remainingTime, timerMode, setTimerMode, reset } = useTimer();
 
   const [showPopup, setShowPopup] = useState(false);
-
+  const currentTask = (tasks && tasks.find((task) => task.current)) || null;
+  const pendingTasks = (tasks || []).filter(
+    (task) =>
+      task.status === TaskStatus.enum.IDLE ||
+      task.status === TaskStatus.enum.PROGRESS
+  );
   useEffect(() => {
     if (remainingTime === 0) {
       setShowPopup(true);
     }
-  }, [remainingTime]);
-
-  const currentTask = (tasks && tasks.find((task) => task.current)) || null;
-  const pendingTasks = (tasks || []).filter(
-    (task) =>
-      task.status === TaskStatus.IDLE || task.status === TaskStatus.PROGRESS
-  );
+  }, [remainingTime, setShowPopup]);
 
   return (
     <Popup isOpen={showPopup} onClose={() => setShowPopup(false)}>
@@ -29,19 +28,16 @@ const TaskPopupAlert = () => {
       <button
         className="bg-blue-700 text-white border-2 border-blue-700 p-2 pl-3 pr-3 text-center rounded-sm w-full mt-3"
         onClick={() => {
-          if (timerMode === "work" && currentTask) {
-            setTaskStatus(currentTask.id, TaskStatus.DONE);
-
-            if (pendingTasks.length > 1) {
-              setTimerMode("break");
-            }
-            setShowPopup(false);
-          } else if (timerMode === "break") {
-            setTimerMode("work");
-            setCurrentTask(pendingTasks[0].id);
-            reset();
-            setShowPopup(false);
-          }
+          // if (timerMode === "work") {
+          //   if (pendingTasks.length > 0) {
+          //     setCurrentTask(pendingTasks[0].id);
+          //   }
+          //   setTimerMode("break");
+          // } else if (timerMode === "break") {
+          //   setTimerMode("work");
+          // }
+          // reset();
+          setShowPopup(false);
         }}
       >
         Close

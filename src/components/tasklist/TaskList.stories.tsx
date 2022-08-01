@@ -19,8 +19,8 @@ const Template: ComponentStory<typeof TaskProvider> = (args) => (
 export const TaskList = Template.bind({});
 TaskList.args = {
   initialTasks: [
-    { id: "1", name: "Buy milk", status: TaskStatus.IDLE, current: true },
-    { id: "2", name: "Walk teddy", status: TaskStatus.DONE },
-    { id: "3", name: "Call mom", status: TaskStatus.IDLE },
+    { id: "1", name: "Buy milk", status: TaskStatus.enum.IDLE, current: true },
+    { id: "2", name: "Walk teddy", status: TaskStatus.enum.DONE },
+    { id: "3", name: "Call mom", status: TaskStatus.enum.IDLE },
   ],
 };

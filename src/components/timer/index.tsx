@@ -3,40 +3,30 @@ import { Icons } from "../../generated/icons/types";
 import { useTask } from "../../provider/task/TaskProvider";
 import { TaskStatus } from "../../provider/task/types";
 import { useTimer } from "../../provider/timer/TimerProvider";
+import { statusIcon } from "../../selectors/taskSwitcher";
 import ProgressCircle from "../progresscircle";
 import TimerDisplay from "../timerdisplay";
 
 const Timer = ({ size = 300 }) => {
   const {
-    initialRemainingTime,
+    totalRemainingTime,
     remainingTime,
     timerState,
     timerMode,
     toggleTimer,
     reset,
+    increaseTime,
   } = useTimer();
 
   const { tasks, setCurrentTask } = useTask();
 
-  const progress = parseInt(`${(remainingTime / initialRemainingTime) * 100}`);
+  const progress = parseInt(`${(remainingTime / totalRemainingTime) * 100}`);
   const pendingTasks = (tasks || []).filter(
     (task) =>
-      task.status === TaskStatus.IDLE || task.status === TaskStatus.PROGRESS
+      task.status === TaskStatus.enum.IDLE ||
+      task.status === TaskStatus.enum.PROGRESS
   );
   const currentTask = pendingTasks.find((task) => task.current);
-
-  const statusIcon = () => {
-    switch (timerState) {
-      case "stopped":
-        return Icons.PLAY;
-      case "running":
-        return Icons.PAUSE;
-      case "paused":
-        return Icons.PLAY;
-      default:
-        return Icons.PLAY;
-    }
-  };
 
   return (
     <div
@@ -55,12 +45,16 @@ const Timer = ({ size = 300 }) => {
             toggleTimer();
           }}
         >
-          <i className={statusIcon()} />
+          <i className={statusIcon(timerState)} />
         </button>
-        <button disabled={tasks.length === 0} onClick={() => reset()}>
+        <button disabled={pendingTasks.length === 0} onClick={() => reset()}>
           <i className={Icons.CCW} />
         </button>
-        <button className="font-bold">
+        <button
+          className="font-bold"
+          disabled={pendingTasks.length === 0}
+          onClick={() => increaseTime()}
+        >
           +{timerMode === "work" ? "5" : "2"}
         </button>
         <TimerDisplay time={remainingTime} className="col-span-3 text-center" />

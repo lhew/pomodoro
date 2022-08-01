@@ -3,21 +3,17 @@ import { useTask } from "../../provider/task/TaskProvider";
 import { ITask, TaskStatus } from "../../provider/task/types";
 import { Icons } from "../../generated/icons/types";
 import { useTimer } from "../../provider/timer/TimerProvider";
+import { statusIcon } from "../../selectors/taskSwitcher";
 const TaskList = () => {
-  const { tasks, removeTask, setCurrentTask, setTaskStatus } = useTask();
+  const { tasks, removeTask, setCurrentTask, setTaskStatus, get } = useTask();
   const { reset, setTimerMode, timerMode, timerState } = useTimer();
 
   const isCurrentTask = (id: ITask["id"]) =>
     tasks.filter((task) => task.id === id).length > 0 &&
     timerState === "running";
 
-  const finishedTasks = (tasks || []).filter(
-    (task) => task.status === TaskStatus.DONE
-  );
-  const pendingTasks = (tasks || []).filter(
-    (task) =>
-      task.status === TaskStatus.IDLE || task.status === TaskStatus.PROGRESS
-  );
+  const pendingTasks = get(TaskStatus.enum.IDLE);
+  const finishedTasks = get(TaskStatus.enum.DONE);
 
   return (
     <>
@@ -30,10 +26,7 @@ const TaskList = () => {
       <ul>
         {pendingTasks.map(({ id, name, current }) => (
           <li key={id} className="grid gap-x-3 grid-cols-[1fr_auto_auto]">
-            <span className={`${current ? "font-bold" : ""}`}>
-              {" "}
-              {id} - {name}
-            </span>
+            <span className={`${current ? "font-bold" : ""}`}>{name}</span>
             <button
               onClick={() => {
                 setCurrentTask(id);
@@ -41,13 +34,19 @@ const TaskList = () => {
                 reset("running");
               }}
             >
-              <i className={Icons.PLAY} />
+              <i
+                className={
+                  current && timerMode === "work"
+                    ? statusIcon(timerState)
+                    : Icons.PLAY
+                }
+              />
             </button>
             <button
               className={`opacity-${isCurrentTask(id) ? "0" : "1"}`}
-              disabled={isCurrentTask(id)}
+              disabled={current}
               onClick={() => {
-                if (isCurrentTask(id)) {
+                if (current) {
                   console.log("stop the timer before deleting your task");
                 } else {
                   removeTask(id);
@@ -67,16 +66,26 @@ const TaskList = () => {
             key={id}
             className="grid gap-x-3 grid-cols-[1fr_auto_auto] line-through"
           >
-            <span>
-              {id} {name}
-            </span>
-            <span></span>
+            <span>{name}</span>
             <button
               onClick={() => {
-                setTaskStatus(id, TaskStatus.IDLE);
+                setTaskStatus(id, TaskStatus.enum.IDLE);
               }}
             >
               <i className={Icons.CCW} />
+            </button>
+            <button
+              className={`opacity-${isCurrentTask(id) ? "0" : "1"}`}
+              disabled={isCurrentTask(id)}
+              onClick={() => {
+                if (isCurrentTask(id)) {
+                  console.log("stop the timer before deleting your task");
+                } else {
+                  removeTask(id);
+                }
+              }}
+            >
+              <i className={Icons.TRASH} />
             </button>
           </li>
         ))}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Icons } from "../../generated/icons/types";
+import { useSettings } from "../../provider/settings/SettingsProvider";
 import { useTask } from "../../provider/task/TaskProvider";
 import { TaskStatus } from "../../provider/task/types";
 import { useTimer } from "../../provider/timer/TimerProvider";
@@ -19,6 +20,7 @@ const Timer = ({ size = 300 }) => {
   } = useTimer();
 
   const { tasks, setCurrentTask } = useTask();
+  const { settings, toggleSettingsPopup } = useSettings();
 
   const progress = parseInt(`${(remainingTime / totalRemainingTime) * 100}`);
   const pendingTasks = (tasks || []).filter(
@@ -35,7 +37,7 @@ const Timer = ({ size = 300 }) => {
       <ProgressCircle
         progress={Math.abs((isNaN(progress) ? 0 : progress) - 100)}
       />
-      <div className="absolute left-[50%] top-[50%] z-2 translate-x-[-50%] translate-y-[-40%] grid grid-cols-3 gap-3 justify-center">
+      <div className="absolute left-[50%] top-[50%] z-2 translate-x-[-50%] translate-y-[-40%] grid grid-cols-4 gap-3 justify-center">
         <button
           disabled={pendingTasks.length === 0}
           onClick={() => {
@@ -55,9 +57,12 @@ const Timer = ({ size = 300 }) => {
           disabled={pendingTasks.length === 0}
           onClick={() => increaseTime()}
         >
-          +{timerMode === "work" ? "5" : "2"}
+          +{timerMode === "work" ? settings.taskTime : settings.breakTime}
         </button>
-        <TimerDisplay time={remainingTime} className="col-span-3 text-center" />
+        <button onClick={() => toggleSettingsPopup()}>
+          <i className={Icons.COG} />
+        </button>
+        <TimerDisplay time={remainingTime} className="col-span-4 text-center" />
       </div>
     </div>
   );

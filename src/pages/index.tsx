@@ -10,6 +10,7 @@ import TimerProvider from "../provider/timer/TimerProvider";
 import RepositoryProvider from "../provider/repository/RepositoryProvider";
 import { ITask, Task } from "../provider/task/types";
 import { useEffect, useState } from "react";
+import SettingsProvider from "../provider/settings/SettingsProvider";
 
 const Home: NextPage = () => {
   const { user, error, isLoading } = useUser();
@@ -29,11 +30,13 @@ const Home: NextPage = () => {
           <span>Get stuff done today</span>
         </div>
         <RepositoryProvider>
-          <TimerProvider>
-            <TaskProvider>
-              <TaskTimer />
-            </TaskProvider>
-          </TimerProvider>
+          <SettingsProvider>
+            <TimerProvider>
+              <TaskProvider>
+                <TaskTimer />
+              </TaskProvider>
+            </TimerProvider>
+          </SettingsProvider>
         </RepositoryProvider>
 
         <div className={styles.grid}>

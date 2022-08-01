@@ -1,5 +1,6 @@
 import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { useInterval } from "usehooks-ts";
+import { useSettings } from "../settings/SettingsProvider";
 import { TimerContext } from "./context";
 import { ITimerContext, TimerMode, TimerState } from "./types";
 
@@ -19,6 +20,7 @@ const TimerProvider = ({
   initialMode = "work",
   onFinish = () => {},
 }: TimerProviderProps) => {
+  const { settings } = useSettings();
   const [totalRemainingTime, setTotalRemainingTime] =
     useState(initialRemainingTime);
   const [remainingTime, setRemainingTime] = useState(initialRemainingTime);
@@ -46,7 +48,8 @@ const TimerProvider = ({
   }, 1000);
 
   const increaseTime = () => {
-    const increaseValue = timerMode === "work" ? 5 : 2;
+    const increaseValue =
+      timerMode === "work" ? settings.taskTime : settings.breakTime;
     setTotalRemainingTime((oldVal) => oldVal + increaseValue);
     setRemainingTime((oldVal) => oldVal + increaseValue);
   };

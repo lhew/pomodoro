@@ -1,5 +1,4 @@
 import React, { ReactNode, useContext } from "react";
-import z from "zod";
 import {
   LOCALSTORAGE_SETTINGS_KEY,
   LOCALSTORAGE_TASKS_KEY,
@@ -19,7 +18,7 @@ const RepositoryProvider = ({
   type = "localstorage",
   children,
 }: RepositoryProviderProps) => {
-  const updateTasks = (data: ITask[] = [], update = "") => {
+  const updateTasks = (data: ITask[] = []) => {
     if (Array.isArray(data)) {
       data.forEach((task) => Task.parse(task));
       localStorage.setItem(LOCALSTORAGE_TASKS_KEY, JSON.stringify(data));
@@ -43,7 +42,6 @@ const RepositoryProvider = ({
       return parsedTasks;
     } catch (e) {
       console.error("stored tasks data is not valid json. ", e);
-      // localStorage.removeItem(LOCALSTORAGE_TASKS_KEY);
       return [];
     }
   };
@@ -63,9 +61,7 @@ const RepositoryProvider = ({
         localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY) || "{}"
       );
 
-      const parsedSettings = Settings.parse(storedSettings);
-
-      return parsedSettings;
+      return Settings.parse(storedSettings);
     } catch (e) {
       console.warn("settings were not loaded. using default settings.");
       console.error(e);

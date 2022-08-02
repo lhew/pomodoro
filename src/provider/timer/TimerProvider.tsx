@@ -1,6 +1,5 @@
 import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { useInterval } from "usehooks-ts";
-import useAudio from "../../hooks/useAudio";
 import { useAlarm } from "../alarm/AlarmProvider";
 import { useSettings } from "../settings/SettingsProvider";
 import { TimerContext } from "./context";

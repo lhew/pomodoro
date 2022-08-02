@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Popup from "../popup";
-import { Formik, Form, Field } from "formik";
+import { Formik } from "formik";
 import { useSettings } from "../../provider/settings/SettingsProvider";
-import { Icons } from "../../generated/icons/types";
 import SettingsForm from "./SettingsForm";
 
 const SettingsPopup = () => {

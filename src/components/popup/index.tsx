@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Icons } from "../../generated/icons/types";
 
 export interface PopupProps {

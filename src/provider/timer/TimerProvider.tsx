@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useEffect, useRef, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { useInterval } from "usehooks-ts";
 import { useAlarm } from "../alarm/AlarmProvider";
 import { useSettings } from "../settings/SettingsProvider";

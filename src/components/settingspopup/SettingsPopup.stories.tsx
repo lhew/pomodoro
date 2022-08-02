@@ -11,7 +11,7 @@ export default {
   component: SettingsPopupComponent,
 } as ComponentMeta<typeof SettingsPopupComponent>;
 
-const Template: ComponentStory<typeof TaskProvider> = (args) => (
+const Template: ComponentStory<typeof TaskProvider> = () => (
   <SettingsProvider>
     <SettingsPopupComponent />
   </SettingsProvider>

@@ -1,5 +1,3 @@
-import { v4 } from "uuid";
-
 import { ReactNode, useContext, useEffect, useState } from "react";
 import { SettingsContext } from "./context";
 import { ISettings, ISettingsContext } from "./types";
@@ -31,9 +29,9 @@ const SettingsProvider = ({ children }: SettingsProps) => {
         toggleSettingsPopup() {
           _setIsOpen(!_isOpen);
         },
-        saveSettings(_settings: ISettings) {
-          _saveSettings(_settings);
-          updateSettings(_settings);
+        saveSettings(settings: ISettings) {
+          _saveSettings(settings);
+          updateSettings(settings);
         },
       }}
     >

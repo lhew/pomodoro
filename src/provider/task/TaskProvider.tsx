@@ -30,7 +30,11 @@ const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
     if (remainingTime === 0) {
       const nextTimerMode = timerMode === "work" ? "break" : "work";
       if (timerMode === "work") {
-        setTaskStatus(get(TaskStatus.enum.CURRENT)[0].id, TaskStatus.enum.DONE);
+        if (get(TaskStatus.enum.CURRENT)[0])
+          setTaskStatus(
+            get(TaskStatus.enum.CURRENT)[0].id,
+            TaskStatus.enum.DONE
+          );
       }
       setTimerMode(nextTimerMode);
     }

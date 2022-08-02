@@ -10,6 +10,7 @@ import TimerProvider from "../provider/timer/TimerProvider";
 
 import SettingsProvider from "../provider/settings/SettingsProvider";
 import RepositoryProvider from "../provider/repository/RepositoryProvider";
+import AlarmProvider from "../provider/alarm/AlarmProvider";
 
 const Home: NextPage = () => {
   const { user, error, isLoading } = useUser();
@@ -28,15 +29,17 @@ const Home: NextPage = () => {
           <h1>Pomodoro</h1>
           <span>Get stuff done today</span>
         </div>
-        <RepositoryProvider>
-          <SettingsProvider>
-            <TimerProvider>
-              <TaskProvider>
-                <TaskTimer />
-              </TaskProvider>
-            </TimerProvider>
-          </SettingsProvider>
-        </RepositoryProvider>
+        <AlarmProvider>
+          <RepositoryProvider>
+            <SettingsProvider>
+              <TimerProvider>
+                <TaskProvider>
+                  <TaskTimer />
+                </TaskProvider>
+              </TimerProvider>
+            </SettingsProvider>
+          </RepositoryProvider>
+        </AlarmProvider>
 
         {/* <div className={styles.grid}>
           {!user?.name && <a href="/api/auth/login">Login</a>}

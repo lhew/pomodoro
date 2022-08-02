@@ -77,7 +77,8 @@ const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
     const current = (_tasks || []).filter((task) => task.current);
 
     switch (taskType) {
-      case TaskStatus.enum.IDLE || TaskStatus.enum.PROGRESS:
+      case TaskStatus.enum.IDLE:
+      case TaskStatus.enum.PROGRESS:
         return pending;
 
       case TaskStatus.enum.DONE:

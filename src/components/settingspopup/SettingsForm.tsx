@@ -112,8 +112,15 @@ const SettingsForm = () => {
           </button>
         </li>
         <li>
-          <button>Ok</button>
-          <button>Cancel</button>
+          <hr className="my-3 " />
+        </li>
+        <li className="grid grid-cols-2  gap-x-3">
+          <button className="bg-blue-700 text-white border-2 border-blue-700 p-2 pl-3 pr-3 text-center rounded-sm mt-3">
+            Ok
+          </button>
+          <button className="bg-gray-400 text-white border-2 border-gray-400 p-2 pl-3 pr-3 text-center rounded-sm mt-3">
+            Cancel
+          </button>
         </li>
       </ul>
     </Form>

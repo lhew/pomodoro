@@ -16,22 +16,22 @@ export default {
 const Template: ComponentStory<typeof TaskTimerComponent> = (args) => (
   <AlarmProvider>
     <SettingsProvider>
-      <TaskProvider
-        initialTasks={[
-          {
-            id: "1",
-            name: "Buy milk",
-            status: TaskStatus.enum.IDLE,
-            current: true,
-          },
-          { id: "2", name: "Walk teddy", status: TaskStatus.enum.DONE },
-          { id: "3", name: "Call mom", status: TaskStatus.enum.IDLE },
-        ]}
-      >
-        <TimerProvider>
+      <TimerProvider>
+        <TaskProvider
+          initialTasks={[
+            {
+              id: "1",
+              name: "Buy milk",
+              status: TaskStatus.enum.IDLE,
+              current: true,
+            },
+            { id: "2", name: "Walk teddy", status: TaskStatus.enum.DONE },
+            { id: "3", name: "Call mom", status: TaskStatus.enum.IDLE },
+          ]}
+        >
           <TaskTimerComponent />
-        </TimerProvider>
-      </TaskProvider>
+        </TaskProvider>
+      </TimerProvider>
     </SettingsProvider>
   </AlarmProvider>
 );

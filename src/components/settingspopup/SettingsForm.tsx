@@ -11,17 +11,19 @@ const alarms = [
   { name: "Jackpot", value: "jackpot" },
 ];
 
+const alarmPath = (alarmSound = "") => `/static/audio/${alarmSound}.mp3`;
+
 const SettingsForm = () => {
   const {
     values: { alarmSound },
   } = useFormikContext<ISettings>();
 
   const iconRef = useRef<HTMLLIElement>(null);
-  const audio = useAudio(`/alarms/${alarmSound}.mp3`);
+  const audio = useAudio(alarmPath(alarmSound));
 
   useEffect(() => {
     if (alarmSound !== "No sound") {
-      audio.src = `/alarms/${alarmSound}.mp3`;
+      audio.src = alarmPath(alarmSound);
       audio.load();
       if (iconRef.current) iconRef.current.className = Icons.PLAY;
     }

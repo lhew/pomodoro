@@ -14,10 +14,7 @@ interface RepositoryProviderProps {
   children?: ReactNode;
 }
 
-const RepositoryProvider = ({
-  type = "localstorage",
-  children,
-}: RepositoryProviderProps) => {
+const RepositoryProvider = ({ children }: RepositoryProviderProps) => {
   const updateTasks = (data: ITask[] = []) => {
     if (Array.isArray(data)) {
       data.forEach((task) => Task.parse(task));
@@ -37,9 +34,7 @@ const RepositoryProvider = ({
         throw new Error("Parsed data is not a valid list of tasks");
       }
 
-      const parsedTasks = items.map((task) => Task.parse(task));
-
-      return parsedTasks;
+      return items.map((task) => Task.parse(task));
     } catch (e) {
       console.error("stored tasks data is not valid json. ", e);
       return [];

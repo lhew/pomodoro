@@ -47,7 +47,7 @@ const TaskList = () => {
               disabled={current}
               onClick={() => {
                 if (current) {
-                  console.log("stop the timer before deleting your task");
+                  console.warn("stop the timer before deleting your task");
                 } else {
                   removeTask(id);
                 }
@@ -79,7 +79,7 @@ const TaskList = () => {
               disabled={isCurrentTask(id)}
               onClick={() => {
                 if (isCurrentTask(id)) {
-                  console.log("stop the timer before deleting your task");
+                  console.warn("stop the timer before deleting your task");
                 } else {
                   removeTask(id);
                 }

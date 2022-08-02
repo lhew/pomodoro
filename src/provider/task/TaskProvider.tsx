@@ -14,11 +14,11 @@ interface TaskProviderProps {
 const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
   const [_tasks, _setTasks] = useState<ITask[]>([]);
   const { remainingTime, timerMode, setTimerMode } = useTimer();
-  const { updateRepository, getItems } = useRepository();
+  const { updateTasks, getTasks } = useRepository();
 
   useEffect(() => {
-    _setTasks(getItems());
-  }, [getItems]);
+    _setTasks(getTasks());
+  }, [getTasks]);
 
   useEffect(() => {
     if (initialTasks.length > 0) {
@@ -30,7 +30,11 @@ const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
     if (remainingTime === 0) {
       const nextTimerMode = timerMode === "work" ? "break" : "work";
       if (timerMode === "work") {
-        setTaskStatus(get(TaskStatus.enum.CURRENT)[0].id, TaskStatus.enum.DONE);
+        if (get(TaskStatus.enum.CURRENT)[0])
+          setTaskStatus(
+            get(TaskStatus.enum.CURRENT)[0].id,
+            TaskStatus.enum.DONE
+          );
       }
       setTimerMode(nextTimerMode);
     }
@@ -40,7 +44,7 @@ const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
     if (get(TaskStatus.enum.IDLE).length === 0) {
       setTimerMode("work");
     }
-  }, [_tasks, timerMode]);
+  }, [_tasks, timerMode, setTimerMode]);
 
   function setTaskStatus(taskId: ITask["id"], status: ETaskStatus) {
     const updatedTasks: ITask[] = _tasks.map((task) => ({
@@ -50,7 +54,7 @@ const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
     }));
 
     _setTasks(updatedTasks);
-    updateRepository(updatedTasks);
+    updateTasks(updatedTasks);
   }
 
   function setCurrentTask(taskId: ITask["id"]) {
@@ -60,7 +64,7 @@ const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
     }));
 
     _setTasks(updatedTasks);
-    updateRepository(updatedTasks);
+    updateTasks(updatedTasks);
   }
 
   function get(taskType: ETaskStatus) {
@@ -104,7 +108,7 @@ const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
           ];
 
           _setTasks(updatedTasks);
-          updateRepository(updatedTasks);
+          updateTasks(updatedTasks);
         },
 
         setCurrentTask,
@@ -115,7 +119,7 @@ const TaskProvider = ({ children, initialTasks = [] }: TaskProviderProps) => {
           );
 
           _setTasks(updatedTasks);
-          updateRepository(updatedTasks);
+          updateTasks(updatedTasks);
         },
 
         get,

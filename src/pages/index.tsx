@@ -7,9 +7,10 @@ import { useUser } from "@auth0/nextjs-auth0";
 import TaskTimer from "../components/tasktimer";
 import TaskProvider from "../provider/task/TaskProvider";
 import TimerProvider from "../provider/timer/TimerProvider";
+
+import SettingsProvider from "../provider/settings/SettingsProvider";
 import RepositoryProvider from "../provider/repository/RepositoryProvider";
-import { ITask, Task } from "../provider/task/types";
-import { useEffect, useState } from "react";
+import AlarmProvider from "../provider/alarm/AlarmProvider";
 
 const Home: NextPage = () => {
   const { user, error, isLoading } = useUser();
@@ -28,18 +29,22 @@ const Home: NextPage = () => {
           <h1>Pomodoro</h1>
           <span>Get stuff done today</span>
         </div>
-        <RepositoryProvider>
-          <TimerProvider>
-            <TaskProvider>
-              <TaskTimer />
-            </TaskProvider>
-          </TimerProvider>
-        </RepositoryProvider>
+        <AlarmProvider>
+          <RepositoryProvider>
+            <SettingsProvider>
+              <TimerProvider>
+                <TaskProvider>
+                  <TaskTimer />
+                </TaskProvider>
+              </TimerProvider>
+            </SettingsProvider>
+          </RepositoryProvider>
+        </AlarmProvider>
 
-        <div className={styles.grid}>
+        {/* <div className={styles.grid}>
           {!user?.name && <a href="/api/auth/login">Login</a>}
           {user?.name && <a href="/api/auth/logout">Logout</a>}
-        </div>
+        </div> */}
       </main>
     </div>
   );

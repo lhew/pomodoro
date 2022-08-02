@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
@@ -13,7 +12,7 @@ import RepositoryProvider from "../provider/repository/RepositoryProvider";
 import AlarmProvider from "../provider/alarm/AlarmProvider";
 
 const Home: NextPage = () => {
-  const { user, error, isLoading } = useUser();
+  const { error, isLoading } = useUser();
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 

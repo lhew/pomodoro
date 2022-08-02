@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../../public/icons/css/fontello.css";
 import type { AppProps } from "next/app";
 import { UserProvider } from "@auth0/nextjs-auth0";
 

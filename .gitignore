@@ -21,7 +21,7 @@
 
 # fontello
 /src/generated
-
+/public/icons
 .fontello-session
 
 # debug

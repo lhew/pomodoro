@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Index from ".";
+import Index from "../pages";
 import { RequestError, UserProvider } from "@auth0/nextjs-auth0";
 
 export default {

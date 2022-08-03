@@ -56,7 +56,6 @@ const TimerProvider = ({
       alarm.play();
 
       if (settings.showNotifications && !document.hasFocus()) {
-        console.log({ tomato });
         const notification = new Notification("Time is up!");
 
         notification.onclick = () => {

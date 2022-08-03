@@ -177,6 +177,7 @@ const SettingsForm = ({ onCancel = () => null }: SettingsFormProps) => {
         <li className="grid grid-cols-2  gap-x-3">
           <Button>Ok</Button>
           <Button
+            type="button"
             secondary
             onClick={() => {
               onCancel();

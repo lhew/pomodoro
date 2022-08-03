@@ -1,21 +1,12 @@
 import classNames from "classnames";
-import React, { RefObject } from "react";
+import React from "react";
 
 interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "className"> {
   className?: string[];
-  name: string;
-  ref?: RefObject<HTMLInputElement> | undefined;
   field?: any;
 }
-const Input = ({
-  children,
-  className = [],
-  name,
-  ref,
-  field = {},
-  ...props
-}: InputProps) => {
+const Input = ({ className = [], field = {}, ...props }: InputProps) => {
   return (
     <input
       className={classNames(
@@ -30,7 +21,6 @@ const Input = ({
         { "cursor-not-allowed": props.disabled },
         ...className
       )}
-      ref={ref}
       {...props}
       {...field}
     />

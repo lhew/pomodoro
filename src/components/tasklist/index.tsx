@@ -26,7 +26,9 @@ const TaskList = () => {
       <ul>
         {pendingTasks.map(({ id, name, current }) => (
           <li key={id} className="grid gap-x-3 grid-cols-[1fr_auto_auto]">
-            <span className={`${current ? "font-bold" : ""}`}>{name}</span>
+            <span className={`${current ? "font-bold" : ""} truncate`}>
+              {name}
+            </span>
             <button
               onClick={() => {
                 setCurrentTask(id);
@@ -64,9 +66,9 @@ const TaskList = () => {
         {finishedTasks.map(({ id, name }) => (
           <li
             key={id}
-            className="grid gap-x-3 grid-cols-[1fr_auto_auto] line-through"
+            className="grid gap-x-3 white-space  grid-cols-[1fr_auto_auto] line-through"
           >
-            <span>{name}</span>
+            <span className="truncate">{name}</span>
             <button
               onClick={() => {
                 setTaskStatus(id, TaskStatus.enum.IDLE);

@@ -20,7 +20,7 @@ const TaskPopupAlert = () => {
       <h1 className="text-center">Time is up!</h1>
 
       <button
-        className="bg-blue-700 text-white border-2 border-blue-700 p-2 pl-3 pr-3 text-center rounded-sm w-full mt-3"
+        className="bg-red-700 text-white border-2 border-red-700 p-2 pl-3 pr-3 text-center rounded-sm w-full mt-3"
         onClick={() => {
           alarm.stop();
           setShowPopup(false);

@@ -16,7 +16,5 @@ const Template: ComponentStory<typeof InputComponent> = (args) => (
 export const Input = Template.bind({});
 
 Input.args = {
-  children: "I am a Input",
   disabled: false,
-  secondary: false,
 };

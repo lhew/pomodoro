@@ -3,7 +3,7 @@
 
 An app to track your focus in a pomodoro way
 
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lhew_pomodoro&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=lhew_pomodoro) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=lhew_pomodoro&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=lhew_pomodoro)  [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lhew_pomodoro&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=lhew_pomodoro)  [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=lhew_pomodoro&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=lhew_pomodoro)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lhew_pomodoro&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=lhew_pomodoro) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lhew_pomodoro&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=lhew_pomodoro) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=lhew_pomodoro&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=lhew_pomodoro)  [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lhew_pomodoro&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=lhew_pomodoro)  [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=lhew_pomodoro&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=lhew_pomodoro)
 
 ---
   

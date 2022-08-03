@@ -14,9 +14,7 @@ const TaskForm = ({ onAddTask = () => null }: TaskFormProps) => {
       <Formik
         initialValues={{ task: "" }}
         onSubmit={({ task }, { resetForm }) => {
-          console.log({ task });
           if (task && task.trim().length > 0) {
-            console.log("mandou ", task);
             onAddTask(task);
             resetForm();
           }
@@ -39,7 +37,6 @@ const TaskForm = ({ onAddTask = () => null }: TaskFormProps) => {
                 name="task"
                 required
                 autoComplete="off"
-                ref={ref}
                 placeholder="Next task here"
                 component={Input}
                 onKeyDown={(e: KeyboardEvent) => {

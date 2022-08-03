@@ -17,11 +17,11 @@ const Button = ({
   return (
     <button
       className={classNames(
-        `bg-blue-700`,
+        `bg-red-700`,
         "bold",
         "text-white",
         "border-2",
-        `border-blue-700`,
+        `border-red-700`,
         "p-2",
         "pl-3",
         "pr-3",

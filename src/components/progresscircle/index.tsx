@@ -41,7 +41,7 @@ const ProgressCircle = ({ progress = 0, disabled = false }) => {
             rotation={DEFAULT_ROTATION}
             x={RADIUS}
             y={RADIUS}
-            fill={timerMode === "work" ? "#d4d4d4" : "#eca9a9"}
+            fill={timerMode === "work" ? "#d4d4d4" : "#dbbf9f"}
             innerRadius={RADIUS - MARKER_WIDTH * 1.25}
             outerRadius={RADIUS - MARKER_WIDTH / 1.75}
           />
@@ -55,7 +55,7 @@ const ProgressCircle = ({ progress = 0, disabled = false }) => {
           >
             <Circle
               radius={MARKER_WIDTH}
-              fill={timerMode === "work" ? "#00BFFF" : "#FF0000"}
+              fill={timerMode === "work" ? "#b93b1c" : "#802a1e"}
               x={CANVAS - MARKER_WIDTH}
               y={RADIUS}
             />

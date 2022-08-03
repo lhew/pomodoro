@@ -20,9 +20,7 @@ const TaskList = () => {
       {(tasks || []).length === 0 && (
         <div className="text-center">No tasks at the moment</div>
       )}
-      {timerMode === "break" && (
-        <span className="flex justify-center mb-4">Break time</span>
-      )}
+
       <ul>
         {pendingTasks.map(({ id, name, current }) => (
           <li key={id} className="grid gap-x-3 grid-cols-[1fr_auto_auto]">

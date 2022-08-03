@@ -7,6 +7,7 @@ export const Settings = z.object({
     breakTime: z.number(),
     breakExtraTime: z.number(),
     alarmSound: z.optional(z.string()),
+    showNotifications: z.boolean(),
 })
 
 export type ISettings = z.infer<typeof Settings>;

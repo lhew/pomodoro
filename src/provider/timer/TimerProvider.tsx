@@ -4,7 +4,6 @@ import { useAlarm } from "../alarm/AlarmProvider";
 import { useSettings } from "../settings/SettingsProvider";
 import { TimerContext } from "./context";
 import { ITimerContext, TimerMode, TimerState } from "./types";
-import tomato from "../../../public/images/tomato.svg";
 
 export interface TimerProviderProps {
   children: ReactNode;

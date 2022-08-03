@@ -10,7 +10,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "storybook-dark-mode",
+    // "storybook-dark-mode",
     'storybook-addon-next-auth0',
     {
       name: "@storybook/addon-postcss",

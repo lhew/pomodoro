@@ -12,29 +12,32 @@ const SettingsPopup = () => {
       alarmSound,
       taskExtraTime,
       breakExtraTime,
+      showNotifications,
     },
     toggleSettingsPopup,
     saveSettings,
   } = useSettings();
 
   return (
-    <Popup isOpen onClose={() => null}>
+    <Popup isOpen onClose={() => toggleSettingsPopup()}>
       <h4 className="font-bold">Settings</h4>
       <hr className="mb-3" />
       <Formik
+        enableReinitialize
         initialValues={{
           taskTime,
           taskExtraTime,
           breakTime,
           breakExtraTime,
           alarmSound,
+          showNotifications,
         }}
         onSubmit={(values) => {
           saveSettings(values);
           toggleSettingsPopup();
         }}
       >
-        <SettingsForm />
+        <SettingsForm onCancel={() => toggleSettingsPopup()} />
       </Formik>
     </Popup>
   );

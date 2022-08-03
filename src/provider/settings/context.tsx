@@ -7,6 +7,7 @@ export const defaultSettings: ISettings = {
   taskExtraTime: 5,
   breakTime: 3,
   breakExtraTime: 3,
+  showNotifications: false,
 };
 
 export const SettingsContext = createContext<ISettingsContext>({

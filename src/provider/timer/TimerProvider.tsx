@@ -4,6 +4,7 @@ import { useAlarm } from "../alarm/AlarmProvider";
 import { useSettings } from "../settings/SettingsProvider";
 import { TimerContext } from "./context";
 import { ITimerContext, TimerMode, TimerState } from "./types";
+import tomato from "../../../public/images/tomato.svg";
 
 export interface TimerProviderProps {
   children: ReactNode;
@@ -53,6 +54,16 @@ const TimerProvider = ({
   useEffect(() => {
     if (remainingTime === 0) {
       alarm.play();
+
+      if (settings.showNotifications && !document.hasFocus()) {
+        console.log({ tomato });
+        const notification = new Notification("Time is up!");
+
+        notification.onclick = () => {
+          window.focus();
+          notification.close();
+        };
+      }
     }
   }, [remainingTime]);
 

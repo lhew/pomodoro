@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Icons } from "../../generated/icons/types";
 import { Form, useFormikContext, Field } from "formik";
 import { ISettings } from "../../provider/settings/types";
@@ -6,6 +6,7 @@ import useAudio from "../../hooks/useAudio";
 import Input from "../ui/input";
 import FormField from "../ui/formfield";
 import Select from "../ui/select";
+import Button from "../ui/button";
 
 const alarms = [
   { name: "Sci Fi", value: "sci-fi" },
@@ -16,13 +17,20 @@ const alarms = [
 
 const alarmPath = (alarmSound = "") => `/alarms/${alarmSound}.mp3`;
 
-const SettingsForm = () => {
+interface SettingsFormProps {
+  onCancel?: () => void;
+}
+
+const SettingsForm = ({ onCancel = () => null }: SettingsFormProps) => {
   const {
-    values: { alarmSound },
+    values: { alarmSound, showNotifications },
   } = useFormikContext<ISettings>();
 
   const iconRef = useRef<HTMLLIElement>(null);
   const audio = useAudio(alarmPath(alarmSound));
+
+  const [notificationStatus, setNotificationStatus] =
+    useState<NotificationPermission>();
 
   useEffect(() => {
     if (alarmSound !== "No sound") {
@@ -32,10 +40,20 @@ const SettingsForm = () => {
     }
   }, [alarmSound, audio]);
 
+  useEffect(() => {
+    if (showNotifications) {
+      Notification.requestPermission().then((result) => {
+        setNotificationStatus(result);
+      });
+    }
+  }, [showNotifications]);
+
   return (
     <Form>
       <ul>
-        <li>Tasks</li>
+        <li>
+          <h5 className="mb-2 font-bold">Tasks</h5>
+        </li>
         <li>
           <FormField>
             <span>Normal time</span>
@@ -62,7 +80,9 @@ const SettingsForm = () => {
             />
           </FormField>
         </li>
-        <li>Breaks</li>
+        <li>
+          <h5 className="mb-2 font-bold">Breaks</h5>
+        </li>
         <li>
           <FormField>
             <span>Normal time</span>
@@ -124,15 +144,46 @@ const SettingsForm = () => {
           </FormField>
         </li>
         <li>
+          <FormField>
+            <span className="my-3 grid grid-cols-[auto_1fr_auto]">
+              <Field
+                name="showNotifications"
+                type="checkbox"
+                id="show-notifications"
+                defaultValue={showNotifications}
+                component={Input}
+              />
+              <label htmlFor="show-notifications" className="ml-3">
+                Show notifications
+              </label>
+              {showNotifications && notificationStatus !== "default" && (
+                <i
+                  title={
+                    notificationStatus === "denied"
+                      ? "Check your browser settings to enable notifications"
+                      : "Notifications are enabled"
+                  }
+                  className={
+                    notificationStatus === "denied" ? Icons.ATTENTION : Icons.OK
+                  }
+                />
+              )}
+            </span>
+          </FormField>
+        </li>
+        <li>
           <hr className="my-3 " />
         </li>
         <li className="grid grid-cols-2  gap-x-3">
-          <button className="bg-blue-700 text-white border-2 border-blue-700 p-2 pl-3 pr-3 text-center rounded-sm mt-3">
-            Ok
-          </button>
-          <button className="bg-gray-400 text-white border-2 border-gray-400 p-2 pl-3 pr-3 text-center rounded-sm mt-3">
+          <Button>Ok</Button>
+          <Button
+            secondary
+            onClick={() => {
+              onCancel();
+            }}
+          >
             Cancel
-          </button>
+          </Button>
         </li>
       </ul>
     </Form>

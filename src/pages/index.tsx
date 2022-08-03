@@ -9,6 +9,7 @@ import TimerProvider from "../provider/timer/TimerProvider";
 import SettingsProvider from "../provider/settings/SettingsProvider";
 import RepositoryProvider from "../provider/repository/RepositoryProvider";
 import AlarmProvider from "../provider/alarm/AlarmProvider";
+import Splash from "../components/splash";
 
 const Home: NextPage = () => {
   const { error, isLoading } = useUser();
@@ -23,15 +24,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="flex flex-col text-center mb-10">
-          <h1>Pomodoro</h1>
-          <span>Get stuff done today</span>
-        </div>
         <AlarmProvider>
           <RepositoryProvider>
             <SettingsProvider>
               <TimerProvider>
                 <TaskProvider>
+                  <Splash />
                   <TaskTimer />
                 </TaskProvider>
               </TimerProvider>

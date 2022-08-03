@@ -29,12 +29,22 @@ const TimerProvider = ({
   const [timerMode, setTimerMode] = useState<TimerMode>("work");
 
   const reset = (nextAction: TimerState = "stopped") => {
-    setTotalRemainingTime(initialRemainingTime);
-    setRemainingTime(initialRemainingTime);
+    const { taskTime, breakTime } = settings;
+
+    const resetTime = timerMode === "work" ? taskTime : breakTime;
+
+    setTotalRemainingTime(resetTime);
+    setRemainingTime(resetTime);
     setTimerState(nextAction);
   };
 
   const alarm = useAlarm();
+
+  useEffect(() => {
+    const { taskTime } = settings;
+    setTotalRemainingTime(taskTime);
+    setRemainingTime(taskTime);
+  }, [settings]);
 
   useEffect(() => {
     setTimerMode(initialMode);

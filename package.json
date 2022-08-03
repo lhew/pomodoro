@@ -19,6 +19,7 @@
     "@auth0/nextjs-auth0": "^1.7.0",
     "@types/styled-components": "^5.1.25",
     "@types/uuid": "^8.3.4",
+    "classnames": "^2.3.1",
     "dayjs": "^1.10.8",
     "formik": "^2.2.9",
     "konva": "^8.3.5",

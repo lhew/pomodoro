@@ -18,7 +18,7 @@ const alarmPath = (alarmSound = "") => `/alarms/${alarmSound}.mp3`;
 
 const SettingsForm = () => {
   const {
-    values: { alarmSound, ...values },
+    values: { alarmSound },
   } = useFormikContext<ISettings>();
 
   const iconRef = useRef<HTMLLIElement>(null);
